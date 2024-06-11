@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import {
         Table,
         TableBody,
@@ -8,72 +8,26 @@
         TableHeadCell,
     } from "flowbite-svelte";
 
-    const image = {
-        alt: "erbology",
-        src: "http://sindcomjuazeiro.com.br/site/wp-content/uploads/2020/09/comida-700x445.jpg",
+    export let data;
+
+    $: ({ meal } = data);
+
+    $: image = {
+        alt: "",
+        src: meal?.image_url,
     };
 
-    const foods = [
-        {
-            name: "Carne",
-            calories: 240,
-            amount: 150,
-            unit: "g",
-            total_carbohydrates: "0g",
-            proteins: "30g",
-            total_fat: "15g",
-            saturated_fat: "6g",
-            sodium: "100mg",
-        },
-        {
-            name: "Arroz",
-            calories: 200,
-            amount: 150,
-            unit: "g",
-            total_carbohydrates: "44g",
-            proteins: "4g",
-            total_fat: "0.5g",
-            saturated_fat: "0.1g",
-            sodium: "1mg",
-        },
-        {
-            name: "Feijão",
-            calories: 180,
-            amount: 150,
-            unit: "g",
-            total_carbohydrates: "40g",
-            proteins: "15g",
-            total_fat: "1g",
-            saturated_fat: "0.2g",
-            sodium: "4mg",
-        },
-        {
-            name: "Alface",
-            calories: 10,
-            amount: 100,
-            unit: "g",
-            total_carbohydrates: "2g",
-            proteins: "1g",
-            total_fat: "0.2g",
-            saturated_fat: "0g",
-            sodium: "5mg",
-        },
-        {
-            name: "Tomate",
-            calories: 16,
-            amount: 100,
-            unit: "g",
-            total_carbohydrates: "4g",
-            proteins: "1g",
-            total_fat: "0.2g",
-            saturated_fat: "0g",
-            sodium: "8mg",
-        },
-    ];
+    $: foods = meal?.foods ?? [];
 </script>
 
+<!-- JbHp3r7Sa4WBlC59YcWc -->
+
+<svelte:head> 
+    <title>Detalhes</title>
+</svelte:head>
+
 <div class="flex justify-center w-screen">
-    <div class="max-w-96 w-full">
+    <div class="max-w-5xl">
         <div class="w-full flex justify-between">
             <h1
                 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-10"
@@ -83,7 +37,7 @@
             <h1
                 class="text-2xl font-bold tracking-tight text-orange-500 dark:text-white mb-10"
             >
-                726 Calorias
+                {meal?.total_calories ?? 0} Calorias
             </h1>
         </div>
 
@@ -91,7 +45,7 @@
             <img
                 src={image.src}
                 alt={image.alt}
-                class="h-auto max-w-14 rounded-lg"
+                class="h-auto max-w-96 rounded-lg"
             />
         </div>
 
