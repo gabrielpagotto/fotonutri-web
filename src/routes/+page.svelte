@@ -6,14 +6,11 @@
     <title>FotoNutri</title>
 </svelte:head>
 
-<div class="mb-24 flex">
-    <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Bem-vindo ao
-    </h1>
-    <h1 class="text-4xl font-bold tracking-tight text-primary-500 ml-3">
-        FotoNutri
-    </h1>
-</div>
+<h1
+    class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-24"
+>
+    Bem-vindo ao FotoNutri!
+</h1>
 
 <h1
     class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white mb-10"

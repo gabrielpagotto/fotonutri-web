@@ -35,10 +35,21 @@
     </h1>
 </div>
 
+<h1
+class="tracking-tight text-gray-900 dark:text-white mb-10"
+>
+{meal.description}
+</h1>
+
 <div class="flex w-full justify-center mb-10">
     <img src={image.src} alt={image.alt} class="h-auto max-w-96 rounded-lg" />
 </div>
 
+<h1
+    class="text-xl font-bold tracking-tight text-gray-900 dark:text-white mb-5"
+>
+    Alimentos encontrados
+</h1>
 <Table striped>
     <TableHead>
         <TableHeadCell>Nome</TableHeadCell>
