@@ -22,6 +22,17 @@
 
 <svelte:head>
     <title>{meal.name}</title>
+    <meta property="og:title" content="{meal.name}" />
+    <meta property="og:description" content="{meal.description}" />
+    <meta property="og:image" content="{meal.image_url}" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="315" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{meal.name}" />
+    <meta name="twitter:description" content="{meal.description}" />
+    <meta name="twitter:image" content="{meal.image_url}" />
 </svelte:head>
 
 <div class="w-full flex justify-between">
