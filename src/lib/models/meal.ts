@@ -1,11 +1,13 @@
-export type Meal = { 
+export type Meal = {
     id: string
+    name: string
+    description: string
     total_calories: number
     image_url: string
     foods: Food[]
 }
 
-export type Food = { 
+export type Food = {
     proteins: string
     calories: number
     sodium: string

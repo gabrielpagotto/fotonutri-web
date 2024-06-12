@@ -4,6 +4,6 @@
 </script>
 
 <main>
-    <h1>{status}</h1>
-    <p>{error.message}</p>
+    <h1 class="text-gray-900 dark:text-white">{status}</h1>
+    <p class="text-gray-900 dark:text-white">{error.message}</p>
 </main>
