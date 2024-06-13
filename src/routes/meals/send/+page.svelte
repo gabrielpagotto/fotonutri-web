@@ -1,21 +1,12 @@
 <script lang="ts">
-    import {
-        Button,
-        Fileupload,
-        Label,
-        Spinner,
-        Toast,
-        Modal,
-    } from "flowbite-svelte";
+    import { Button, Fileupload, Label, Spinner, Modal } from "flowbite-svelte";
     import { goto } from "$app/navigation";
     import { createApiUrl } from "$lib/utils/clients";
-    import {
-        ExclamationCircleSolid,
-        ExclamationCircleOutline,
-    } from "flowbite-svelte-icons";
+    import { ExclamationCircleOutline } from "flowbite-svelte-icons";
     import type { Meal } from "$lib/models/meal";
 
-    const fileMaxSize = 5 * 1024 * 1024; // 5 MB
+    const maxFileMB = 2;
+    const fileMaxSize = maxFileMB * 1024 * 1024; // 5 MB
 
     let value: string | undefined;
     let files: FileList | undefined;
@@ -29,13 +20,10 @@
         }
 
         if (files![0].size > fileMaxSize) {
-            error =
-                "A imagem que você quer enviar é muito grande. Selecione uma imagem de no máximo 5MB.";
+            error = `A imagem que você quer enviar é muito grande. Selecione uma imagem de no máximo ${maxFileMB}MB.`;
             errorModalOpened = true;
             return;
         }
-
-        files![0].size;
 
         const formData = new FormData();
         formData.append("image", files![0]);
@@ -81,6 +69,9 @@
         alimentos presentes na foto e suas informações nutricionais.
     </span>
     <Fileupload bind:value bind:files size="sm" accept="image/*" />
+    <span class="font-light">
+       A foto deve possuir no máximo {maxFileMB}MB de tamanho.
+    </span>
 </Label>
 
 <div class="flex justify-center mb-10">
