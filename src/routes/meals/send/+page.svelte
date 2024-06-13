@@ -5,7 +5,7 @@
     import { ExclamationCircleOutline } from "flowbite-svelte-icons";
     import type { Meal } from "$lib/models/meal";
 
-    const maxFileMB = 2;
+    const maxFileMB = 20;
     const fileMaxSize = maxFileMB * 1024 * 1024; // 5 MB
 
     let value: string | undefined;
