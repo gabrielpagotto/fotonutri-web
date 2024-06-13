@@ -1,19 +1,41 @@
 <script lang="ts">
-    import { Button, Fileupload, Label, Spinner, Toast } from "flowbite-svelte";
+    import {
+        Button,
+        Fileupload,
+        Label,
+        Spinner,
+        Toast,
+        Modal,
+    } from "flowbite-svelte";
     import { goto } from "$app/navigation";
     import { createApiUrl } from "$lib/utils/clients";
-    import { ExclamationCircleSolid } from "flowbite-svelte-icons";
+    import {
+        ExclamationCircleSolid,
+        ExclamationCircleOutline,
+    } from "flowbite-svelte-icons";
     import type { Meal } from "$lib/models/meal";
+
+    const fileMaxSize = 5 * 1024 * 1024; // 5 MB
 
     let value: string | undefined;
     let files: FileList | undefined;
     let submiting = false;
     let error: string | undefined;
+    let errorModalOpened = false;
 
     const submit = async () => {
         if ((files?.length ?? 0) <= 0) {
             return;
         }
+
+        if (files![0].size > fileMaxSize) {
+            error =
+                "A imagem que você quer enviar é muito grande. Selecione uma imagem de no máximo 5MB.";
+            errorModalOpened = true;
+            return;
+        }
+
+        files![0].size;
 
         const formData = new FormData();
         formData.append("image", files![0]);
@@ -30,6 +52,7 @@
             if (data.detail == "No food was found in the image") {
                 error =
                     "Nenhum alimento foi encontrado na foto que você enviou.";
+                errorModalOpened = true;
             }
             return;
         }
@@ -79,16 +102,14 @@
     </Button>
 </div>
 
-<div class="flex justify-center mb-10">
-    <Toast
-        color="orange"
-        bind:open={toastErrorOpen}
-        on:close={() => (error = undefined)}
-    >
-        <svelte:fragment slot="icon">
-            <ExclamationCircleSolid class="w-5 h-5" />
-            <span class="sr-only">Warning icon</span>
-        </svelte:fragment>
-        {error}
-    </Toast>
-</div>
+<Modal bind:open={errorModalOpened} size="xs" autoclose color="primary">
+    <div class="text-center">
+        <ExclamationCircleOutline
+            class="mx-auto mb-4 text-red-400 w-12 h-12 dark:text-red-200"
+        />
+        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            {error}
+        </h3>
+        <Button color="primary">Continuar</Button>
+    </div>
+</Modal>
